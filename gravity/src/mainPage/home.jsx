@@ -5,7 +5,6 @@ const Home = () => {
   return (
     <_.Main_Div>
       <Main_bottom />
-      <div>asldjasldjasdlkj</div>
     </_.Main_Div>
   );
 };

@@ -1,0 +1,10 @@
+@font-face {
+  font-family: "Jua";
+  src: url("./fonts/BMJUA_otf.otf") format("opentype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+body {
+  font-family: "Jua";
+}
