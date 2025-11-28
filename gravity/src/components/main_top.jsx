@@ -6,7 +6,7 @@ export const MainTop = () => {
             <_.logo>
                 자유낙하 시각화
             </_.logo>
-            <_.logButton>
+            <_.logButton onClick={()=>{}}>
                 로그인
             </_.logButton>
         </_.top>
