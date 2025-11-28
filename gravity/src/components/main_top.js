@@ -27,6 +27,7 @@ export const logButton = styled.button`
     font-weight: 400;
     line-height: normal;
     
+    &:hover { cursor : pointer}
 `
 
 export const logo = styled.div`
