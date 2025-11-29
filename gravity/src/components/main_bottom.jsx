@@ -5,6 +5,7 @@ export const Main_bottom = () => {
     <_.Main>
       <_.Text>@made by 곰돌이미역 먹는 말미잘</_.Text>
       <_.blackLiks>블랙리스트</_.blackLiks>
+      <input type="file" accept="image/*"></input>
     </_.Main>
   );
 };
