@@ -86,13 +86,15 @@ export const midLeftTopT = styled.p`
 
 export const midLeftTopIn = styled.input`
     display: flex;
-    width: 10px;
-    padding: 16px 350px 16px 22px;
+    width: 100%;
+    padding: 16px 22px;
     align-items: center;
     border-radius: 10px;
     border: 1px solid #B7B7B7;
     background: #FFF;
-`
+    box-sizing: border-box;
+`;
+
 
 export const midRightTop = styled.div`
     display: flex;
@@ -115,13 +117,15 @@ export const midRightTopT = styled.p`
 
 export const midRightTopIn = styled.input`
     display: flex;
-    width: 30px;
-    padding: 16px 337px 16px 17px;
+    width: 100%;
+    padding: 16px 22px;
     align-items: center;
     border-radius: 10px;
     border: 1px solid #B7B7B7;
     background: #FFF;
-`
+    box-sizing: border-box;
+`;
+
 
 export const midLeftMid = styled.div`
     display: flex;
