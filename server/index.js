@@ -83,6 +83,15 @@ app.post("/api/users/imgs", (req, res) => {
   res.json({ message: "success", img_path: result.img_path });
 });
 
+//생물 이미지를 넣은 유저를 블랙리스트에 추가
+app.post("/api/users/blacklist", (req, res) => {
+  const user_id = req.body.user_id;
+  if (!user_id) {
+    return res.status(400).json({ message: "userId is not exist" });
+  }
+  conn.query(`insert into black_list(user_id, date) values(${user_id}, NOW())`);
+});
+
 //최근 이미지 불러오기
 app.get("/api/users/imgs", (req, res) => {
   const user_id = req.body.user_id;
@@ -95,6 +104,7 @@ app.get("/api/users/imgs", (req, res) => {
   );
 });
 
+//이미지 데이터 가져오기
 app.post("/api/images/url", async (req, res) => {
   const url = req.body.url;
 
