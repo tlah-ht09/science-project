@@ -7,6 +7,7 @@ const JEM_API = import.meta.env.VITE_JEM_API_KEY;
 const ai = new GoogleGenAI({ apiKey: JEM_API });
 
 export const Main_modal = ({ mass, height, PE, KE, v, onClose }) => {
+
   const [url, setUrl] = useState("");
 
   const [geminiResult, setGeminiResult] = useState("");

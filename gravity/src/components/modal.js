@@ -3,11 +3,22 @@ import styled from '@emotion/styled'
 
 
 export const main = styled.div`
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(0,0,0,0.4);
+    z-index: 9999;
+`
+export const modalBox = styled.div`
     width: 1100px;
     height: 700px;
     border-radius: 20px;
     background: #FFF;
-    
 `
 
 export const top = styled.div`
@@ -132,7 +143,7 @@ export const buttomBtton4 = styled.button`
 
 export const mid = styled.div`
     width:978px;
-    heigth: 455px;
+    height: 455px;
     padding: 20px 0px 20px 30px;
     flex-direction: column;
     align-items: flex-start;

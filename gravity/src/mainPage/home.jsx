@@ -10,7 +10,6 @@ const Home = () => {
       <MainTop></MainTop>
       <Main_mid></Main_mid>
       <Main_bottom />
-      <Main_modal/>
     </_.Main_Div>
   );
 };
