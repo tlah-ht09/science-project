@@ -160,7 +160,9 @@ export const Main_modal = ({ mass, height, PE, KE, v, onClose }) => {
                   setUrl(e.target.value);
                 }}
               ></_.buttomBtton>
-              <_.buttomBtton2>추가하기</_.buttomBtton2>
+              <_.buttomBtton2 onClick={handleAddImage} disabled={isLoading}>
+                추가하기
+              </_.buttomBtton2>
               <_.buttomBtton2>재생</_.buttomBtton2>
               <_.buttomBtton3>리셋</_.buttomBtton3>
               <_.buttomBtton4 onClick={onClose}>닫기</_.buttomBtton4>
