@@ -5,22 +5,21 @@ import { Modal2 } from "./modal2.jsx";
 export const Main_bottom = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const handleOpenModal = () => {
-    setIsModalOpen(true);
-  };
-
-  const handleCloseModal = () => {
-    setIsModalOpen(false);
+  const handleToggleModal = () => {
+    setIsModalOpen((prev) => !prev);
   };
 
   return (
     <>
       <_.Main>
         <_.Text>@made by 곰돌이미역 먹는 말미잘</_.Text>
-        <_.blackLiks onClick={handleOpenModal}>블랙리스트</_.blackLiks>
+
+        {/* 이 버튼 하나로 ON / OFF */}
+        <_.blackLiks onClick={handleToggleModal}>블랙리스트</_.blackLiks>
       </_.Main>
 
-      {isModalOpen && <Modal2></Modal2>}
+      {/* 상태에 따라 모달 표시 */}
+      {isModalOpen && <Modal2 />}
     </>
   );
 };
