@@ -8,7 +8,7 @@ const ai = new GoogleGenAI({ apiKey: JEM_API });
 
 export const Main_modal = ({ mass, height, PE, KE, v, onClose }) => {
   const [url, setUrl] = useState("");
-
+  const [result, setResult] = useState("");
   const [geminiResult, setGeminiResult] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   //유효성 검사
@@ -70,7 +70,7 @@ export const Main_modal = ({ mass, height, PE, KE, v, onClose }) => {
     setGeminiResult("이미지 분석 중...");
 
     const reader = new FileReader();
-    reader.onloadend = () => {
+    reader.onloadend = async () => {
       const base64 = reader.result.split(",")[1];
       console.log(base64.slice(0, 50));
 
@@ -92,11 +92,11 @@ export const Main_modal = ({ mass, height, PE, KE, v, onClose }) => {
       ];
 
       try {
-        const response = ai.models.generateContent({
+        const response = await ai.models.generateContent({
           model: "gemini-2.5-flash",
           contents: contents,
         });
-        console.log(response.text);
+        setResult(response.text);
 
         setGeminiResult(response.text);
       } catch (error) {
