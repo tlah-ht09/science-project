@@ -2,14 +2,15 @@ import { useEffect, useState, useRef } from "react";
 import * as _ from "./modal.js";
 import { GoogleGenAI } from "@google/genai";
 import { useAtomValue } from "jotai";
-import { user_id } from "../atom.js";
+import { user_id, user_email, blackList } from "../atom.js";
 
 const JEM_API = import.meta.env.VITE_JEM_API_KEY;
 
 const ai = new GoogleGenAI({ apiKey: JEM_API });
 
 export const Main_modal = ({ mass, height, PE, KE, v, onClose }) => {
-  const [url, setUrl] = useState("");
+  const [url, setUrl] = useState(null);
+  const [ballUrl, setBallUrl] = useState(null);
   const [result, setResult] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
@@ -22,21 +23,44 @@ export const Main_modal = ({ mass, height, PE, KE, v, onClose }) => {
   const startTimeRef = useRef(null);
 
   const userId = useAtomValue(user_id);
+  const userEmail = useAtomValue(user_email);
+  const useblackList = useAtomValue(blackList);
+
+  const [isBlocked, setIsBlocked] = useState(false);
 
   useEffect(() => {
     console.log("현재 user_id:", userId);
+    console.log("현재 user_email:", userEmail);
+    console.log("현재 blackList:", useblackList);
+
+    if (useblackList.some((item) => item.user_email === userEmail)) {
+      setIsBlocked(true);
+      console.log("사용자가 블랙리스트에 등록되어 있습니다.");
+    }
   }, []);
 
   useEffect(() => {
-    if (result == true || result == "true") {
+    if (result === true || result === "true") {
       alert("살아있는 생물 이미지는 사용할 수 없습니다.");
       fetch("http://localhost:4000/api/users/blacklist", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          user_email: userId,
+          user_email: userEmail,
         }),
       });
+    } else if (result === false || result === "false") {
+      console.log(result);
+      console.log("dlksdkskfjdweoijfwofjoisjoiwe");
+      fetch("http://localhost:4000/api/users/imgs", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          user_id: userId,
+          img_path: url,
+        }),
+      });
+      setBallUrl(url);
     }
     setResult("");
   }, [result]);
@@ -61,6 +85,18 @@ export const Main_modal = ({ mass, height, PE, KE, v, onClose }) => {
     }
 
     return { isValid: true, mimeType: mimeType };
+  };
+
+  const getLatesImg = async () => {
+    const response = await fetch(
+      `http://localhost:4000/api/users/imgs?user_id=${userId}`,
+      {
+        method: "GET",
+      }
+    );
+    const data = await response.json();
+    setUrl(data.image_path);
+    console.log("최근 이미지 경로:", data.image_path);
   };
 
   // 제미니 사용
@@ -220,7 +256,7 @@ export const Main_modal = ({ mass, height, PE, KE, v, onClose }) => {
                 <_.AnimationContainer>
                   <_.midMidMidLeftScreen />
                   {ballPosition >= 0 && ballPosition <= 100 && (
-                    <_.Ball $position={ballPosition} />
+                    <_.Ball $position={ballPosition} src={ballUrl} />
                   )}
                 </_.AnimationContainer>
               </_.midMidMidLeft>
@@ -260,15 +296,34 @@ export const Main_modal = ({ mass, height, PE, KE, v, onClose }) => {
               />
               <_.buttomBtton2
                 onClick={() => {
-                  if (userId != undefined) {
-                    handleAddImage();
-                  } else {
+                  if (userId == undefined || userId == "") {
                     alert("로그인 후 이용 가능합니다.");
+                    return;
+                  }
+                  if (isBlocked) {
+                    alert("블랙리스트에 등록되어 이용할 수 없습니다.");
+                  } else {
+                    handleAddImage();
                   }
                 }}
                 disabled={isLoading}
               >
                 추가하기
+              </_.buttomBtton2>
+              <_.buttomBtton2
+                onClick={() => {
+                  if (userId == undefined || userId == "") {
+                    alert("로그인 후 이용 가능합니다.");
+                    return;
+                  }
+                  if (isBlocked) {
+                    alert("블랙리스트에 등록되어 이용할 수 없습니다.");
+                  } else {
+                    getLatesImg();
+                  }
+                }}
+              >
+                최근 이미지
               </_.buttomBtton2>
               <_.buttomBtton2 onClick={handlePlay} disabled={isPlaying}>
                 재생

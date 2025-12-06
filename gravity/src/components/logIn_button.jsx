@@ -1,15 +1,18 @@
 import React, { useEffect, useRef, useState } from "react";
 import * as _ from "./logIn_button.js";
 import { useSetAtom } from "jotai";
-import { user_id } from "../atom.js";
+import { user_id, user_email } from "../atom.js";
 
 const GOOGLE_CLIENT_ID = import.meta.env.VITE_GOOGLE_API;
 
 export const CustomGoogleButton = () => {
   const setUserId = useSetAtom(user_id);
+  const setUserEmail = useSetAtom(user_email);
   const [userInfo, setUserInfo] = useState(null);
   const tokenClientRef = useRef(null);
   const [mesage, setMesage] = useState("로그인");
+
+  const [idInfo, setIdInfo] = useState(null);
 
   useEffect(() => {
     if (userInfo?.email != null || userInfo?.name != null) {
@@ -22,8 +25,27 @@ export const CustomGoogleButton = () => {
         }),
       });
     }
-    setUserId(userInfo?.email);
+
+    setUserEmail(userInfo?.email);
+
+    const fetchId = async () => {
+      const res = await fetch(
+        `http://localhost:4000/api/users/id?user_email=${userInfo?.email}`
+      );
+      const data = await res.json();
+
+      setIdInfo(data.user_id);
+    };
+
+    fetchId();
   }, [userInfo]);
+
+  useEffect(() => {
+    if (idInfo != null) {
+      console.log(idInfo);
+      setUserId(idInfo);
+    }
+  }, [idInfo]);
 
   useEffect(() => {
     // OAuth2 토큰 클라이언트 초기화

@@ -44,7 +44,7 @@ export const topT = styled.p`
 
 export const buttom = styled.div`
   display: flex;
-  width: 1093px;
+  width: 1094px;
   padding: 23px 30px;
   flex-direction: column;
   align-items: flex-start;
@@ -78,7 +78,7 @@ export const buttomButtonDiv = styled.div`
 
 export const buttomBtton = styled.input`
   display: flex;
-  padding: 10px 23px;
+  padding: 10px 13px;
   justify-content: center;
   align-items: center;
   gap: 10px;
@@ -165,7 +165,7 @@ export const buttomBtton4 = styled.button`
 `;
 
 export const mid = styled.div`
-  width: 1100px;
+  width: 1094px;
   height: 496px;
   padding: 20px 30px;
   display: flex;
@@ -238,13 +238,13 @@ export const midMidMidLeftScreen = styled.div`
   border-radius: 10px;
 `;
 
-export const Ball = styled.div`
+export const Ball = styled.img`
   position: absolute;
   top: ${(props) => props.$position}%;
   left: 50%;
-  transform: translate(-50%, -20px);
-  width: 40px;
-  height: 40px;
+  transform: translate(-50%, -50px);
+  width: 80px;
+  height: 80px;
   border-radius: 50%;
   background-color: #ff6b6b;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
