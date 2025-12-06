@@ -9,8 +9,22 @@ const ai = new GoogleGenAI({ apiKey: JEM_API });
 export const Main_modal = ({ mass, height, PE, KE, v, onClose }) => {
   const [url, setUrl] = useState("");
   const [result, setResult] = useState("");
-  const [geminiResult, setGeminiResult] = useState("");
+
   const [isLoading, setIsLoading] = useState(false);
+
+  useEffect(() => {
+    if (result == true || result == "true") {
+      alert("살아있는 생물 이미지는 사용할 수 없습니다.");
+      fetch("http://localhost:4000/api/users/blacklist", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          user_id: 1,
+        }),
+      });
+    }
+  }, [result]);
+
   //유효성 검사
   const getMimeTypeAndValidate = (url) => {
     const cleanedUrl = url.split("?")[0].toLowerCase();
@@ -67,7 +81,6 @@ export const Main_modal = ({ mass, height, PE, KE, v, onClose }) => {
     }
 
     setIsLoading(true);
-    setGeminiResult("이미지 분석 중...");
 
     const reader = new FileReader();
     reader.onloadend = async () => {
@@ -97,12 +110,8 @@ export const Main_modal = ({ mass, height, PE, KE, v, onClose }) => {
           contents: contents,
         });
         setResult(response.text);
-
-        setGeminiResult(response.text);
       } catch (error) {
         console.error("오류 발생:", error);
-
-        setGeminiResult("오류 발생: " + error.message);
       } finally {
         setIsLoading(false);
       }
