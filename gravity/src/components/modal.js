@@ -7,6 +7,7 @@ export const main = styled.div`
   width: 100vw;
   height: 100vh;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   background: rgba(0, 0, 0, 0.4);
@@ -28,6 +29,7 @@ export const top = styled.div`
   gap: 10px;
   border-radius: 20px 20px 0 0;
   border-bottom: 1px solid #d1d1d1;
+  background-color: white;
 `;
 
 export const topT = styled.p`
@@ -41,7 +43,7 @@ export const topT = styled.p`
 
 export const buttom = styled.div`
   display: flex;
-  width: 1100px;
+  width: 1093px;
   padding: 23px 30px;
   flex-direction: column;
   align-items: flex-start;
@@ -139,6 +141,14 @@ export const buttomBtton4 = styled.button`
   line-height: normal;
 `;
 
+export const mid_div = styled.div`
+  width: 1153px;
+  height: 496px;
+  background-color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
 export const mid = styled.div`
   width: 978px;
 
