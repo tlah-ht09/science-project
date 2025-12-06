@@ -124,10 +124,6 @@ export const Main_modal = ({ mass, height, PE, KE, v, onClose }) => {
                 <_.midMidMidLeftT>속도 : </_.midMidMidLeftT>
                 <_.midMidMidLeftT>운동에너지 : </_.midMidMidLeftT>
                 {/* 7. 결과 표시 */}
-                <_.midMidMidLeftT>
-                  분석 결과:{" "}
-                  {isLoading ? "로딩 중..." : geminiResult || "경로 입력 대기"}
-                </_.midMidMidLeftT>
               </_.midMidMidLeftTdiv>
               <_.midMidMidLeftScreen></_.midMidMidLeftScreen>
             </_.midMidMidLeft>
