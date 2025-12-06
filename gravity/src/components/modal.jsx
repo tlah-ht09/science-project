@@ -2,7 +2,7 @@ import { useEffect, useState, useRef } from "react";
 import * as _ from "./modal.js";
 import { GoogleGenAI } from "@google/genai";
 import { useAtomValue } from "jotai";
-import { user_id, user_email } from "../atom.js";
+import { user_id, user_email, blackList } from "../atom.js";
 
 const JEM_API = import.meta.env.VITE_JEM_API_KEY;
 
@@ -24,10 +24,19 @@ export const Main_modal = ({ mass, height, PE, KE, v, onClose }) => {
 
   const userId = useAtomValue(user_id);
   const userEmail = useAtomValue(user_email);
+  const useblackList = useAtomValue(blackList);
+
+  const [isBlocked, setIsBlocked] = useState(false);
 
   useEffect(() => {
     console.log("현재 user_id:", userId);
     console.log("현재 user_email:", userEmail);
+    console.log("현재 blackList:", useblackList);
+
+    if (useblackList.some((item) => item.user_email === userEmail)) {
+      setIsBlocked(true);
+      console.log("사용자가 블랙리스트에 등록되어 있습니다.");
+    }
   }, []);
 
   useEffect(() => {
@@ -287,17 +296,35 @@ export const Main_modal = ({ mass, height, PE, KE, v, onClose }) => {
               />
               <_.buttomBtton2
                 onClick={() => {
-                  if (userId != undefined) {
-                    handleAddImage();
-                  } else {
+                  if (userId == undefined || userId == "") {
                     alert("로그인 후 이용 가능합니다.");
+                    return;
+                  }
+                  if (isBlocked) {
+                    alert("블랙리스트에 등록되어 이용할 수 없습니다.");
+                  } else {
+                    handleAddImage();
                   }
                 }}
                 disabled={isLoading}
               >
                 추가하기
               </_.buttomBtton2>
-              <_.buttomBtton2 onClick={getLatesImg}>최근 이미지</_.buttomBtton2>
+              <_.buttomBtton2
+                onClick={() => {
+                  if (userId == undefined || userId == "") {
+                    alert("로그인 후 이용 가능합니다.");
+                    return;
+                  }
+                  if (isBlocked) {
+                    alert("블랙리스트에 등록되어 이용할 수 없습니다.");
+                  } else {
+                    getLatesImg();
+                  }
+                }}
+              >
+                최근 이미지
+              </_.buttomBtton2>
               <_.buttomBtton2 onClick={handlePlay} disabled={isPlaying}>
                 재생
               </_.buttomBtton2>

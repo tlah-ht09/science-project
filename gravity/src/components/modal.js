@@ -44,7 +44,7 @@ export const topT = styled.p`
 
 export const buttom = styled.div`
   display: flex;
-  width: 1093px;
+  width: 1094px;
   padding: 23px 30px;
   flex-direction: column;
   align-items: flex-start;
@@ -165,7 +165,7 @@ export const buttomBtton4 = styled.button`
 `;
 
 export const mid = styled.div`
-  width: 1100px;
+  width: 1094px;
   height: 496px;
   padding: 20px 30px;
   display: flex;
@@ -242,7 +242,7 @@ export const Ball = styled.img`
   position: absolute;
   top: ${(props) => props.$position}%;
   left: 50%;
-  transform: translate(-50%, -20px);
+  transform: translate(-50%, -50px);
   width: 80px;
   height: 80px;
   border-radius: 50%;
