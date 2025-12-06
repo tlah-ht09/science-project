@@ -1,9 +1,12 @@
 import React, { useEffect, useRef, useState } from "react";
 import * as _ from "./logIn_button.js";
+import { useSetAtom } from "jotai";
+import { user_id } from "../atom.js";
 
 const GOOGLE_CLIENT_ID = import.meta.env.VITE_GOOGLE_API;
 
 export const CustomGoogleButton = () => {
+  const setUserId = useSetAtom(user_id);
   const [userInfo, setUserInfo] = useState(null);
   const tokenClientRef = useRef(null);
   const [mesage, setMesage] = useState("로그인");
@@ -19,6 +22,7 @@ export const CustomGoogleButton = () => {
         }),
       });
     }
+    setUserId(userInfo?.email);
   }, [userInfo]);
 
   useEffect(() => {

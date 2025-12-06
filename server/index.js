@@ -85,11 +85,21 @@ app.post("/api/users/imgs", (req, res) => {
 
 //생물 이미지를 넣은 유저를 블랙리스트에 추가
 app.post("/api/users/blacklist", (req, res) => {
-  const user_id = req.body.user_id;
-  if (!user_id) {
-    return res.status(400).json({ message: "userId is not exist" });
+  const { user_email } = req.body.user_email;
+
+  if (!user_email) {
+    return res.status(400).json({ message: "user_email is not exist" });
   }
-  conn.query(`insert into black_list(user_id, date) values(${user_id}, NOW())`);
+
+  const sql = `INSERT INTO black_list(user_email, date) VALUES (?, NOW())`;
+
+  conn.query(sql, [user_email], (err, result) => {
+    if (err) {
+      console.error(err);
+      return res.status(500).json({ message: err.message });
+    }
+    res.status(200).json({ message: "blacklisted" });
+  });
 });
 
 //최근 이미지 불러오기

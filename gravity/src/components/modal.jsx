@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import * as _ from "./modal.js";
 import { GoogleGenAI } from "@google/genai";
+import { useAtomValue } from "jotai";
+import { user_id } from "../atom.js";
 
 const JEM_API = import.meta.env.VITE_JEM_API_KEY;
 
@@ -12,6 +14,12 @@ export const Main_modal = ({ mass, height, PE, KE, v, onClose }) => {
 
   const [isLoading, setIsLoading] = useState(false);
 
+  const userId = useAtomValue(user_id);
+
+  useEffect(() => {
+    console.log("현재 user_id:", userId);
+  }, []);
+
   useEffect(() => {
     if (result == true || result == "true") {
       alert("살아있는 생물 이미지는 사용할 수 없습니다.");
@@ -19,10 +27,11 @@ export const Main_modal = ({ mass, height, PE, KE, v, onClose }) => {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          user_id: 1,
+          user_email: userId,
         }),
       });
     }
+    setResult("");
   }, [result]);
 
   //유효성 검사
@@ -169,7 +178,16 @@ export const Main_modal = ({ mass, height, PE, KE, v, onClose }) => {
                   setUrl(e.target.value);
                 }}
               ></_.buttomBtton>
-              <_.buttomBtton2 onClick={handleAddImage} disabled={isLoading}>
+              <_.buttomBtton2
+                onClick={() => {
+                  if (userId != undefined) {
+                    handleAddImage();
+                  } else {
+                    alert("로그인 후 이용 가능합니다.");
+                  }
+                }}
+                disabled={isLoading}
+              >
                 추가하기
               </_.buttomBtton2>
               <_.buttomBtton2>재생</_.buttomBtton2>
