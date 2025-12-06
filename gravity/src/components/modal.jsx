@@ -12,7 +12,7 @@ export const Main_modal = ({ mass, height, PE, KE, v, onClose }) => {
   const [url, setUrl] = useState("");
   const [result, setResult] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  
+
   // 애니메이션 상태
   const [ballPosition, setBallPosition] = useState(0); // 공의 위치 (0 ~ 100%)
   const [currentVelocity, setCurrentVelocity] = useState(0);
@@ -143,13 +143,13 @@ export const Main_modal = ({ mass, height, PE, KE, v, onClose }) => {
 
     const elapsed = (timestamp - startTimeRef.current) / 1000; // 초 단위
     const g = 9.8; // 중력가속도 (m/s²)
-    
+
     // 속도 계산: v = g * t
     const velocity = g * elapsed;
-    
+
     // 낙하 거리 계산: h = (1/2) * g * t²
     const fallDistance = 0.5 * g * elapsed * elapsed;
-    
+
     // 운동에너지 계산: KE = (1/2) * m * v²
     const kineticEnergy = 0.5 * mass * velocity * velocity;
 
@@ -217,51 +217,29 @@ export const Main_modal = ({ mass, height, PE, KE, v, onClose }) => {
                     운동에너지 : {currentKE.toFixed(2)} J
                   </_.midMidMidLeftT>
                 </_.midMidMidLeftTdiv>
-                <div style={{ position: "relative", width: "100%", height: "400px" }}>
-                  <_.midMidMidLeftScreen style={{ 
-                    position: "absolute",
-                    top: 0,
-                    left: 0,
-                    right: 0,
-                    bottom: 0,
-                  }}>
-                  </_.midMidMidLeftScreen>
-                  {/* 자유낙하하는 공 */}
+                <_.AnimationContainer>
+                  <_.midMidMidLeftScreen />
                   {ballPosition >= 0 && ballPosition <= 100 && (
-                    <div
-                      style={{
-                        position: "absolute",
-                        top: `${ballPosition}%`,
-                        left: "50%",
-                        transform: "translate(-50%, -20px)",
-                        width: "40px",
-                        height: "40px",
-                        borderRadius: "50%",
-                        backgroundColor: "#ff6b6b",
-                        boxShadow: "0 4px 8px rgba(0,0,0,0.3)",
-                        transition: "none",
-                        zIndex: 10,
-                      }}
-                    />
+                    <_.Ball $position={ballPosition} />
                   )}
-                </div>
+                </_.AnimationContainer>
               </_.midMidMidLeft>
               <_.midMidMidRight>
                 <_.midMidMidRightlineDiv>
                   <_.midMidMidRightlineDivT>
                     {height}m 높이
                   </_.midMidMidRightlineDivT>
-                  <_.midMidMidline></_.midMidMidline>
-                  <_.midMidMidline></_.midMidMidline>
-                  <_.midMidMidline></_.midMidMidline>
-                  <_.midMidMidline></_.midMidMidline>
-                  <_.midMidMidline></_.midMidMidline>
-                  <_.midMidMidline></_.midMidMidline>
-                  <_.midMidMidline></_.midMidMidline>
-                  <_.midMidMidline></_.midMidMidline>
-                  <_.midMidMidline></_.midMidMidline>
-                  <_.midMidMidline></_.midMidMidline>
-                  <_.midMidMidline></_.midMidMidline>
+                  <_.midMidMidline />
+                  <_.midMidMidline />
+                  <_.midMidMidline />
+                  <_.midMidMidline />
+                  <_.midMidMidline />
+                  <_.midMidMidline />
+                  <_.midMidMidline />
+                  <_.midMidMidline />
+                  <_.midMidMidline />
+                  <_.midMidMidline />
+                  <_.midMidMidline />
                 </_.midMidMidRightlineDiv>
               </_.midMidMidRight>
             </_.midMidMid>
@@ -279,7 +257,7 @@ export const Main_modal = ({ mass, height, PE, KE, v, onClose }) => {
                 onChange={(e) => {
                   setUrl(e.target.value);
                 }}
-              ></_.buttomBtton>
+              />
               <_.buttomBtton2
                 onClick={() => {
                   if (userId != undefined) {

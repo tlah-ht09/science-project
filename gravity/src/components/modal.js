@@ -13,6 +13,7 @@ export const main = styled.div`
   background: rgba(0, 0, 0, 0.4);
   z-index: 9999;
 `;
+
 export const modalBox = styled.div`
   width: 1100px;
   height: 700px;
@@ -107,7 +108,19 @@ export const buttomBtton2 = styled.button`
   font-style: normal;
   font-weight: 400;
   line-height: normal;
+  cursor: pointer;
+
+  &:hover {
+    background: #4b4b4b;
+  }
+
+  &:disabled {
+    background: #6b6b6b;
+    cursor: not-allowed;
+    opacity: 0.6;
+  }
 `;
+
 export const buttomBtton3 = styled.button`
   display: flex;
   padding: 10px 23px;
@@ -123,6 +136,11 @@ export const buttomBtton3 = styled.button`
   font-style: normal;
   font-weight: 400;
   line-height: normal;
+  cursor: pointer;
+
+  &:hover {
+    background: #c6c6c6;
+  }
 `;
 
 export const buttomBtton4 = styled.button`
@@ -139,103 +157,128 @@ export const buttomBtton4 = styled.button`
   font-style: normal;
   font-weight: 400;
   line-height: normal;
+  cursor: pointer;
+
+  &:hover {
+    background: #d1d1d1;
+  }
 `;
 
-export const mid_div = styled.div`
-  width: 1153px;
+export const mid = styled.div`
+  width: 1100px;
   height: 496px;
-  background-color: white;
+  padding: 20px 30px;
   display: flex;
   align-items: center;
   justify-content: center;
+  background-color: white;
 `;
-export const mid = styled.div`
-  width: 978px;
 
-  height: 455px;
-
-  padding: 20px 0px 20px 30px;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 20px;
+export const midMid = styled.div`
+  width: 100%;
+  height: 100%;
+  padding: 20px;
+  display: flex;
+  align-items: center;
   border-radius: 20px;
   border: 1px solid #d5d5d5;
   background: #e6e6e6;
 `;
 
-export const midMid = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 15px;
-  align-self: stretch;
-`;
-
 export const midMidMid = styled.div`
   display: flex;
-  height: 455px;
+  width: 100%;
+  height: 100%;
   justify-content: space-between;
   align-items: center;
+  gap: 20px;
 `;
 
 export const midMidMidLeft = styled.div`
   display: flex;
-  width: 841px;
+  flex: 1;
   flex-direction: column;
   align-items: flex-start;
-  gap: 6px;
-  flex-shrink: 0;
+  gap: 10px;
+  height: 100%;
 `;
 
 export const midMidMidLeftTdiv = styled.div`
   display: flex;
   align-items: center;
-  gap: 122px;
+  gap: 40px;
+  width: 100%;
+  justify-content: space-around;
 `;
 
 export const midMidMidLeftT = styled.p`
   color: #000;
   font-family: Jua;
-  font-size: 15px;
+  font-size: 16px;
   font-style: normal;
   font-weight: 400;
   line-height: normal;
 `;
 
+export const AnimationContainer = styled.div`
+  position: relative;
+  width: 100%;
+  flex: 1;
+  min-height: 400px;
+`;
+
 export const midMidMidLeftScreen = styled.div`
-  display: flex;
-  height: 400px;
-  justify-content: center;
-  align-items: center;
-  align-self: stretch;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
   border: 2px solid #000;
   background: #fff;
+  border-radius: 10px;
+`;
+
+export const Ball = styled.div`
+  position: absolute;
+  top: ${(props) => props.$position}%;
+  left: 50%;
+  transform: translate(-50%, -20px);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #ff6b6b;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  transition: none;
+  z-index: 10;
 `;
 
 export const midMidMidRight = styled.div`
   display: flex;
-  align-items: flex-end;
-  gap: 13px;
+  align-items: center;
+  height: 100%;
 `;
 
 export const midMidMidRightlineDiv = styled.div`
   display: flex;
-  width: 30px;
   flex-direction: column;
   align-items: center;
+  justify-content: space-between;
+  height: 100%;
+  padding: 10px 0;
 `;
 
 export const midMidMidRightlineDivT = styled.p`
   color: #000;
   font-family: Jua;
-  font-size: 15px;
+  font-size: 14px;
   font-style: normal;
   font-weight: 400;
   line-height: normal;
+  margin-bottom: 10px;
 `;
 
 export const midMidMidline = styled.div`
-  width: 50px;
-  height: 35px;
-  border-bottom: 1px black solid;
-  align-items: right;
+  width: 30px;
+  height: 1px;
+  border-bottom: 2px solid #000;
 `;
